@@ -5,12 +5,18 @@
   "main": "index.js",
   "scripts": {
     "start": "live-server src --port=3000",
+    "build": "npm run copy-files && npm run optimize",
+    "copy-files": "node scripts/copy-files.js",
+    "optimize": "node scripts/optimize.js",
+    "deploy": "npm run build && gh-pages -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": ["landing", "presentation", "website"],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "live-server": "^1.2.2"
+    "live-server": "^1.2.2",
+    "gh-pages": "^6.1.0",
+    "fs-extra": "^11.2.0"
   }
 }

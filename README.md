@@ -1,65 +1,90 @@
-# Presentation Website
+# ExamPass Landing Page
 
-A modern, responsive presentation website template with smooth animations and mobile-friendly design.
+Современный лендинг для сервиса гарантированного поступления в университеты.
 
-## Features
+## 🚀 Быстрый старт
 
-- Responsive design
-- Mobile-friendly navigation
-- Smooth scrolling
-- Animated service cards
-- Contact form
-- Modern UI components
+### Локальная разработка
 
-## Prerequisites
-
-- Node.js (Download and install from [nodejs.org](https://nodejs.org/))
-
-## Getting Started
-
-1. Clone this repository:
 ```bash
-git clone <repository-url>
-cd hantalanding
-```
-
-2. Install dependencies:
-```bash
+# Установка зависимостей
 npm install
-```
 
-3. Start the development server:
-```bash
+# Запуск локального сервера
 npm start
 ```
 
-The website will be available at `http://localhost:3000`
+Сайт будет доступен по адресу: http://localhost:3000
 
-## Project Structure
+### Сборка для продакшена
 
-```
-src/
-├── assets/        # Images and other static files
-├── css/           # Stylesheets
-├── js/           # JavaScript files
-└── index.html    # Main HTML file
+```bash
+# Сборка проекта
+npm run build
 ```
 
-## Customization
+Собранные файлы будут в папке `dist/`
 
-1. Replace the logo text in `index.html`
-2. Update the hero section content
-3. Modify the About section with your content
-4. Customize service cards
-5. Configure the contact form
+## 🌐 Деплой на GitHub Pages
 
-## Development
+### Автоматический деплой (рекомендуется)
 
-The project uses live-server for development, which provides:
-- Auto-reload on file changes
-- Static file serving
-- Cross-browser compatibility
+1. Создайте репозиторий на GitHub
+2. Загрузите код в репозиторий
+3. Перейдите в Settings → Pages
+4. В разделе "Source" выберите "GitHub Actions"
+5. При каждом push в ветку `main` или `master` сайт будет автоматически деплоиться
 
-## License
+### Ручной деплой
 
-This project is licensed under the ISC License. 
+```bash
+# Установка gh-pages
+npm install -g gh-pages
+
+# Деплой
+npm run deploy
+```
+
+## 📁 Структура проекта
+
+```
+hantalandingdeploy/
+├── src/                    # Исходные файлы
+│   ├── index.html         # Главная страница
+│   ├── css/               # Стили
+│   ├── js/                # JavaScript файлы
+│   └── assets/            # Изображения и медиа
+├── scripts/               # Скрипты сборки
+├── .github/workflows/     # GitHub Actions
+├── dist/                  # Собранные файлы (генерируется)
+└── package.json           # Зависимости и скрипты
+```
+
+## 🛠️ Доступные команды
+
+- `npm start` - Запуск локального сервера разработки
+- `npm run build` - Сборка проекта для продакшена
+- `npm run deploy` - Деплой на GitHub Pages
+- `npm run copy-files` - Копирование файлов в dist
+- `npm run optimize` - Оптимизация изображений и HTML
+
+## 🔧 Настройка
+
+### Изменение домена
+
+Если вы хотите использовать кастомный домен:
+
+1. Добавьте файл `CNAME` в папку `src/` с вашим доменом
+2. Настройте DNS записи согласно инструкциям GitHub Pages
+
+### Многоязычность
+
+Сайт поддерживает многоязычность через файл `src/js/translations.js`
+
+## 📝 Лицензия
+
+ISC License
+
+## 🤝 Поддержка
+
+По вопросам деплоя и настройки обращайтесь к документации GitHub Pages. 
