@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Menu Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+        }
+        
+        .header {
+            background: #333;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 300px;
+            height: 100vh;
+            background: #4a90e2;
+            z-index: 10001;
+            transition: left 0.4s ease;
+            display: none;
+        }
+        
+        .mobile-nav.active {
+            left: 0;
+        }
+        
+        .mobile-nav-content {
+            padding: 2rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .mobile-close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .mobile-nav-links {
+            list-style: none;
+            flex: 1;
+        }
+        
+        .mobile-nav-links li {
+            margin-bottom: 1rem;
+        }
+        
+        .mobile-nav-link {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        
+        .mobile-nav-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            display: none;
+        }
+        
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .content {
+            padding: 2rem;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Mobile Menu Test</h1>
+        <button class="mobile-menu-btn">☰</button>
+    </div>
+    
+    <nav class="mobile-nav">
+        <div class="mobile-nav-content">
+            <div class="mobile-nav-header">
+                <h2>Menu</h2>
+                <button class="mobile-close-btn">×</button>
+            </div>
+            <ul class="mobile-nav-links">
+                <li><a href="#about" class="mobile-nav-link">About</a></li>
+                <li><a href="#exams" class="mobile-nav-link">Exams</a></li>
+                <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="mobile-overlay"></div>
+    
+    <div class="content">
+        <div id="about" class="section">
+            <h2>About Section</h2>
+            <p>This is the about section. Click the menu button to test navigation.</p>
+        </div>
+        
+        <div id="exams" class="section">
+            <h2>Exams Section</h2>
+            <p>This is the exams section. The mobile menu should navigate here.</p>
+        </div>
+        
+        <div id="contact" class="section">
+            <h2>Contact Section</h2>
+            <p>This is the contact section. Menu navigation should work properly.</p>
+        </div>
+    </div>
+    
+    <script>
+        let mobileMenuBtn, mobileNav, mobileOverlay, mobileCloseBtn;
+        
+        function openMobileMenu() {
+            console.log('Opening mobile menu...');
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.classList.add('active');
+            }
+            
+            if (mobileNav) {
+                mobileNav.classList.add('active');
+                mobileNav.style.display = 'block';
+            }
+            
+            if (mobileOverlay) {
+                mobileOverlay.classList.add('active');
+                mobileOverlay.style.display = 'block';
+            }
+            
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeMobileMenu() {
+            console.log('Closing mobile menu...');
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.classList.remove('active');
+            }
+            
+            if (mobileNav) {
+                mobileNav.classList.remove('active');
+                setTimeout(() => {
+                    mobileNav.style.display = 'none';
+                }, 400);
+            }
+            
+            if (mobileOverlay) {
+                mobileOverlay.classList.remove('active');
+                setTimeout(() => {
+                    mobileOverlay.style.display = 'none';
+                }, 400);
+            }
+            
+            document.body.style.overflow = '';
+        }
+        
+        function initMobileMenu() {
+            mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            mobileNav = document.querySelector('.mobile-nav');
+            mobileOverlay = document.querySelector('.mobile-overlay');
+            mobileCloseBtn = document.querySelector('.mobile-close-btn');
+            
+            console.log('Mobile menu elements found:', {
+                btn: !!mobileMenuBtn,
+                nav: !!mobileNav,
+                overlay: !!mobileOverlay,
+                closeBtn: !!mobileCloseBtn
+            });
+            
+            // Mobile menu button
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Mobile menu button clicked');
+                    openMobileMenu();
+                });
+            }
+            
+            // Close button
+            if (mobileCloseBtn) {
+                mobileCloseBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Close button clicked');
+                    closeMobileMenu();
+                });
+            }
+            
+            // Overlay click to close
+            if (mobileOverlay) {
+                mobileOverlay.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Overlay clicked');
+                    closeMobileMenu();
+                });
+            }
+            
+            // Navigation links
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const targetId = link.getAttribute('href');
+                    console.log('Navigation link clicked:', targetId);
+                    
+                    if (targetId && targetId.startsWith('#')) {
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            closeMobileMenu();
+                            setTimeout(() => {
+                                targetElement.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                });
+                            }, 500);
+                        }
+                    }
+                });
+            });
+            
+            // ESC key to close
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && mobileNav && mobileNav.classList.contains('active')) {
+                    closeMobileMenu();
+                }
+            });
+            
+            console.log('Mobile menu initialized successfully');
+        }
+        
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initMobileMenu);
+    </script>
+</body>
+</html> 

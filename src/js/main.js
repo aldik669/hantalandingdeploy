@@ -643,171 +643,28 @@ if (logo) {
     });
 }
 
-// Mobile Navigation Functionality
-let mobileMenuBtn, mobileNav, mobileOverlay, mobileCloseBtn, mobileNavLinks, mobileNavLogo;
+// ===== MOBILE MENU - SIMPLE AND RELIABLE =====
+let mobileMenuBtn, mobileNav, mobileOverlay, mobileCloseBtn;
 
 function openMobileMenu() {
     console.log('Opening mobile menu...');
     
     if (mobileMenuBtn) {
         mobileMenuBtn.classList.add('active');
-        console.log('Menu button activated');
     }
     
     if (mobileNav) {
         mobileNav.classList.add('active');
-        // FORCE FIX CSS WHEN OPENING
-        mobileNav.style.setProperty('backdrop-filter', 'none', 'important');
-        mobileNav.style.setProperty('-webkit-backdrop-filter', 'none', 'important');
-        mobileNav.style.setProperty('background', 'linear-gradient(135deg, rgba(55, 48, 163, 0.98) 0%, rgba(79, 70, 229, 0.98) 100%)', 'important');
-        mobileNav.style.setProperty('z-index', '10001', 'important');
-        mobileNav.style.setProperty('pointer-events', 'auto', 'important');
-        
-        // FORCE FIX ALL ELEMENTS INSIDE MENU
-        const allMenuElements = mobileNav.querySelectorAll('*');
-        allMenuElements.forEach(element => {
-            element.style.setProperty('pointer-events', 'auto', 'important');
-            element.style.setProperty('z-index', '10002', 'important');
-        });
-        
-        // SPECIFIC FIXES FOR CRITICAL ELEMENTS
-        const navLinks = mobileNav.querySelectorAll('.mobile-nav-link');
-        navLinks.forEach(link => {
-            link.style.setProperty('pointer-events', 'auto', 'important');
-            link.style.setProperty('z-index', '10003', 'important');
-            link.style.setProperty('position', 'relative', 'important');
-            link.style.setProperty('cursor', 'pointer', 'important');
-        });
-        
-        const closeBtn = mobileNav.querySelector('.mobile-close-btn');
-        if (closeBtn) {
-            closeBtn.style.setProperty('pointer-events', 'auto', 'important');
-            closeBtn.style.setProperty('z-index', '10003', 'important');
-            closeBtn.style.setProperty('cursor', 'pointer', 'important');
-        }
-        
-        const langLinks = mobileNav.querySelectorAll('.mobile-lang-switch a');
-        langLinks.forEach(link => {
-            link.style.setProperty('pointer-events', 'auto', 'important');
-            link.style.setProperty('z-index', '10003', 'important');
-            link.style.setProperty('cursor', 'pointer', 'important');
-        });
-        
-        // FORCE RE-ACTIVATE ALL EVENT LISTENERS AFTER MENU OPENS
-        setTimeout(() => {
-            console.log('Re-activating event listeners for menu elements...');
-            
-            // Simple approach: just force all elements to be clickable
-            const allClickableElements = mobileNav.querySelectorAll('a, button');
-            allClickableElements.forEach(element => {
-                element.style.setProperty('pointer-events', 'auto', 'important');
-                element.style.setProperty('z-index', '10003', 'important');
-                element.style.setProperty('cursor', 'pointer', 'important');
-                element.style.setProperty('position', 'relative', 'important');
-                
-                // Add click handler if not already present
-                if (!element.hasAttribute('data-click-handler-added')) {
-                    element.setAttribute('data-click-handler-added', 'true');
-                    
-                    element.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        console.log('🎯 ELEMENT CLICKED:', this.textContent || this.className);
-                        
-                        // Handle navigation links
-                        if (this.classList.contains('mobile-nav-link')) {
-                            const targetId = this.getAttribute('href');
-                            if (targetId && targetId.startsWith('#')) {
-                                const targetElement = document.querySelector(targetId);
-                                if (targetElement) {
-                                    closeMobileMenu();
-                                    setTimeout(() => {
-                                        targetElement.scrollIntoView({
-                                            behavior: 'smooth',
-                                            block: 'start'
-                                        });
-                                    }, 300);
-                                }
-                            }
-                        }
-                        
-                        // Handle language switcher
-                        if (this.closest('.mobile-lang-switch')) {
-                            const lang = this.textContent.toLowerCase();
-                            console.log('Switching language to:', lang);
-                            
-                            if (window.i18n && typeof window.i18n.setLanguage === 'function') {
-                                window.i18n.setLanguage(lang === 'ru' ? 'ru' : 'en');
-                            } else {
-                                document.documentElement.lang = lang;
-                            }
-                            
-                            closeMobileMenu();
-                        }
-                        
-                        // Handle close button
-                        if (this.classList.contains('mobile-close-btn')) {
-                            closeMobileMenu();
-                        }
-                    });
-                    
-                    element.addEventListener('touchstart', function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        console.log('🎯 ELEMENT TOUCHED:', this.textContent || this.className);
-                        
-                        // Same logic as click
-                        if (this.classList.contains('mobile-nav-link')) {
-                            const targetId = this.getAttribute('href');
-                            if (targetId && targetId.startsWith('#')) {
-                                const targetElement = document.querySelector(targetId);
-                                if (targetElement) {
-                                    closeMobileMenu();
-                                    setTimeout(() => {
-                                        targetElement.scrollIntoView({
-                                            behavior: 'smooth',
-                                            block: 'start'
-                                        });
-                                    }, 300);
-                                }
-                            }
-                        }
-                        
-                        if (this.closest('.mobile-lang-switch')) {
-                            const lang = this.textContent.toLowerCase();
-                            console.log('Switching language to:', lang);
-                            
-                            if (window.i18n && typeof window.i18n.setLanguage === 'function') {
-                                window.i18n.setLanguage(lang === 'ru' ? 'ru' : 'en');
-                            } else {
-                                document.documentElement.lang = lang;
-                            }
-                            
-                            closeMobileMenu();
-                        }
-                        
-                        if (this.classList.contains('mobile-close-btn')) {
-                            closeMobileMenu();
-                        }
-                    }, { passive: false });
-                }
-            });
-            
-            console.log('✅ Event listeners re-activated for', allClickableElements.length, 'elements');
-        }, 100);
-        
-        console.log('Mobile nav activated with forced CSS fixes');
+        mobileNav.style.display = 'block';
     }
     
     if (mobileOverlay) {
         mobileOverlay.classList.add('active');
-        mobileOverlay.style.setProperty('z-index', '10000', 'important');
-        mobileOverlay.style.setProperty('pointer-events', 'auto', 'important');
-        console.log('Overlay activated');
+        mobileOverlay.style.display = 'block';
     }
     
     document.body.style.overflow = 'hidden';
-    console.log('Mobile menu opened successfully');
+    console.log('Mobile menu opened');
 }
 
 function closeMobileMenu() {
@@ -815,268 +672,128 @@ function closeMobileMenu() {
     
     if (mobileMenuBtn) {
         mobileMenuBtn.classList.remove('active');
-        console.log('Menu button deactivated');
     }
     
     if (mobileNav) {
         mobileNav.classList.remove('active');
-        console.log('Mobile nav deactivated');
+        setTimeout(() => {
+            mobileNav.style.display = 'none';
+        }, 400);
     }
     
     if (mobileOverlay) {
         mobileOverlay.classList.remove('active');
-        mobileOverlay.style.setProperty('pointer-events', 'none', 'important');
-        console.log('Overlay deactivated');
+        setTimeout(() => {
+            mobileOverlay.style.display = 'none';
+        }, 400);
     }
     
     document.body.style.overflow = '';
-    console.log('Mobile menu closed successfully');
+    console.log('Mobile menu closed');
 }
 
-// Initialize mobile menu functionality
 function initMobileMenu() {
     mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     mobileNav = document.querySelector('.mobile-nav');
     mobileOverlay = document.querySelector('.mobile-overlay');
     mobileCloseBtn = document.querySelector('.mobile-close-btn');
-    mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-    mobileNavLogo = document.querySelector('.mobile-logo');
 
     console.log('Mobile menu elements found:', {
         btn: !!mobileMenuBtn,
         nav: !!mobileNav,
         overlay: !!mobileOverlay,
-        closeBtn: !!mobileCloseBtn,
-        links: mobileNavLinks.length
+        closeBtn: !!mobileCloseBtn
     });
 
-    // FORCE FIX CSS STYLES
-    if (mobileNav) {
-        // Force remove backdrop-filter and fix styles
-        mobileNav.style.setProperty('backdrop-filter', 'none', 'important');
-        mobileNav.style.setProperty('-webkit-backdrop-filter', 'none', 'important');
-        mobileNav.style.setProperty('background', 'linear-gradient(135deg, rgba(55, 48, 163, 0.98) 0%, rgba(79, 70, 229, 0.98) 100%)', 'important');
-        mobileNav.style.setProperty('z-index', '10001', 'important');
-        mobileNav.style.setProperty('pointer-events', 'auto', 'important');
-        console.log('✅ Forced CSS fixes applied to mobile-nav');
-    }
-
-    if (mobileOverlay) {
-        mobileOverlay.style.setProperty('z-index', '10000', 'important');
-        mobileOverlay.style.setProperty('pointer-events', 'none', 'important');
-        console.log('✅ Forced CSS fixes applied to mobile-overlay');
-    }
-
-    // Event listeners for mobile menu button - multiple event types for better compatibility
-if (mobileMenuBtn) {
-        // Click event
+    // Mobile menu button
+    if (mobileMenuBtn) {
         mobileMenuBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
             console.log('Mobile menu button clicked');
             openMobileMenu();
         });
+    }
 
-        // Touch events for better mobile compatibility
-        mobileMenuBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('Mobile menu button touched');
-            openMobileMenu();
-        }, { passive: false });
-
-        // Mouse events as fallback
-        mobileMenuBtn.addEventListener('mousedown', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('Mobile menu button mousedown');
-            openMobileMenu();
-        });
-}
-
-if (mobileCloseBtn) {
+    // Close button
+    if (mobileCloseBtn) {
         mobileCloseBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            console.log('Mobile close button clicked');
+            console.log('Close button clicked');
             closeMobileMenu();
         });
+    }
 
-        mobileCloseBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('Mobile close button touched');
-            closeMobileMenu();
-        }, { passive: false });
-}
-
-if (mobileOverlay) {
+    // Overlay click to close
+    if (mobileOverlay) {
         mobileOverlay.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            console.log('Mobile overlay clicked');
+            console.log('Overlay clicked');
             closeMobileMenu();
         });
+    }
 
-        mobileOverlay.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('Mobile overlay touched');
-            closeMobileMenu();
-        }, { passive: false });
-}
-
-// Close mobile menu when clicking on nav links
-mobileNavLinks.forEach(link => {
-        // FORCE FIX CSS FOR LINKS
-        link.style.setProperty('pointer-events', 'auto', 'important');
-        link.style.setProperty('z-index', '10002', 'important');
-        link.style.setProperty('position', 'relative', 'important');
-        
+    // Navigation links
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    mobileNavLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            console.log('Mobile nav link clicked:', link.getAttribute('href'));
-        closeMobileMenu();
-        
-        // Smooth scroll to section
-        const targetId = link.getAttribute('href');
-            if (targetId && targetId.startsWith('#')) {
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                setTimeout(() => {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }, 300);
-            }
-        }
-    });
-
-        // Touch events for links
-        link.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('Mobile nav link touched:', link.getAttribute('href'));
-            closeMobileMenu();
             
             const targetId = link.getAttribute('href');
+            console.log('Navigation link clicked:', targetId);
+            
             if (targetId && targetId.startsWith('#')) {
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
+                    closeMobileMenu();
                     setTimeout(() => {
                         targetElement.scrollIntoView({
                             behavior: 'smooth',
                             block: 'start'
                         });
-                    }, 300);
+                    }, 500);
                 }
             }
-        }, { passive: false });
-});
-
-// Mobile logo click
-if (mobileNavLogo) {
-        // FORCE FIX CSS FOR LOGO
-        mobileNavLogo.style.setProperty('pointer-events', 'auto', 'important');
-        mobileNavLogo.style.setProperty('z-index', '10002', 'important');
-        mobileNavLogo.style.setProperty('position', 'relative', 'important');
-        
-    mobileNavLogo.addEventListener('click', function(e) {
-        e.preventDefault();
-            e.stopPropagation();
-            console.log('Mobile logo clicked');
-        closeMobileMenu();
-        
-        setTimeout(() => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }, 300);
+        });
     });
 
-        mobileNavLogo.addEventListener('touchstart', function(e) {
+    // Language switcher
+    const langLinks = document.querySelectorAll('.mobile-lang-switch a');
+    langLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            console.log('Mobile logo touched');
+            
+            const lang = link.textContent.toLowerCase();
+            console.log('Language switch clicked:', lang);
+            
+            // Remove active class from all language links
+            langLinks.forEach(l => l.classList.remove('active'));
+            // Add active class to clicked link
+            link.classList.add('active');
+            
+            // Handle language change
+            if (window.i18n && typeof window.i18n.setLanguage === 'function') {
+                window.i18n.setLanguage(lang === 'ru' ? 'ru' : 'en');
+            } else {
+                document.documentElement.lang = lang;
+            }
+            
             closeMobileMenu();
-            
-            setTimeout(() => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            }, 300);
-        }, { passive: false });
-    }
-
-    // FIX LANGUAGE SWITCHER
-    const mobileLangSwitch = document.querySelector('.mobile-lang-switch');
-    if (mobileLangSwitch) {
-        console.log('Mobile language switcher found');
-        
-        // FORCE FIX CSS FOR LANGUAGE SWITCHER
-        mobileLangSwitch.style.setProperty('pointer-events', 'auto', 'important');
-        mobileLangSwitch.style.setProperty('z-index', '10002', 'important');
-        mobileLangSwitch.style.setProperty('position', 'relative', 'important');
-        
-        const langLinks = mobileLangSwitch.querySelectorAll('a');
-        langLinks.forEach(link => {
-            // FORCE FIX CSS FOR EACH LANGUAGE LINK
-            link.style.setProperty('pointer-events', 'auto', 'important');
-            link.style.setProperty('z-index', '10003', 'important');
-            link.style.setProperty('position', 'relative', 'important');
-            link.style.setProperty('cursor', 'pointer', 'important');
-            
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log('Language link clicked:', this.textContent);
-                
-                // Remove active class from all links
-                langLinks.forEach(l => l.classList.remove('active'));
-                // Add active class to clicked link
-                this.classList.add('active');
-                
-                // Switch language
-                const lang = this.textContent.toLowerCase();
-                if (window.i18n && typeof window.i18n.setLanguage === 'function') {
-                    window.i18n.setLanguage(lang === 'ru' ? 'ru' : 'en');
-                } else {
-                    console.log('i18n not available, manual language switch');
-                    // Manual language switch fallback
-                    document.documentElement.lang = lang;
-                }
-                
-                closeMobileMenu();
-            });
-            
-            link.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log('Language link touched:', this.textContent);
-                
-                // Remove active class from all links
-                langLinks.forEach(l => l.classList.remove('active'));
-                // Add active class to clicked link
-                this.classList.add('active');
-                
-                // Switch language
-                const lang = this.textContent.toLowerCase();
-                if (window.i18n && typeof window.i18n.setLanguage === 'function') {
-                    window.i18n.setLanguage(lang === 'ru' ? 'ru' : 'en');
-                } else {
-                    console.log('i18n not available, manual language switch');
-                    // Manual language switch fallback
-                    document.documentElement.lang = lang;
-                }
-                
-                closeMobileMenu();
-            }, { passive: false });
         });
-    }
+    });
+
+    // ESC key to close
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileNav && mobileNav.classList.contains('active')) {
+            closeMobileMenu();
+        }
+    });
+
+    console.log('Mobile menu initialized successfully');
 }
 
 // Close mobile menu on escape key

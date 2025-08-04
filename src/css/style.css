@@ -3732,12 +3732,12 @@ body {
         width: 300px;
         height: 100vh;
         background: linear-gradient(135deg, rgba(55, 48, 163, 0.98) 0%, rgba(79, 70, 229, 0.98) 100%);
-        backdrop-filter: none !important;
-        z-index: 10001 !important;
+        z-index: 10001;
         transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
+        display: none;
     }
 
 .mobile-nav.active {
@@ -3940,8 +3940,9 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
-    backdrop-filter: none !important;
+    backdrop-filter: none;
     pointer-events: none;
+    display: none;
 }
 
 .mobile-overlay.active {
@@ -4294,66 +4295,14 @@ body {
     }
 }
 
-.mobile-nav,
-.mobile-nav * {
-  pointer-events: auto !important;
-  z-index: 10001 !important;
-}
-
-.mobile-overlay {
-  pointer-events: auto;
-  z-index: 10000;
-}
-.mobile-overlay:not(.active) {
-  pointer-events: none;
-}
-
-/* Fix mobile menu clickability */
-.mobile-nav,
-.mobile-nav *,
-.mobile-nav-content,
-.mobile-nav-header,
-.mobile-nav-links,
-.mobile-nav-link,
-.mobile-close-btn,
-.mobile-logo,
-.mobile-lang-switch,
-.mobile-lang-switch a {
-    pointer-events: auto !important;
-    z-index: 10001 !important;
-}
-
-.mobile-nav {
-    backdrop-filter: none !important;
-    background: linear-gradient(135deg, rgba(55, 48, 163, 0.98) 0%, rgba(79, 70, 229, 0.98) 100%) !important;
-}
-
-/* FINAL MOBILE MENU FIXES */
-.mobile-nav {
-    z-index: 10001 !important;
-    backdrop-filter: none !important;
-    background: linear-gradient(135deg, rgba(55, 48, 163, 0.98) 0%, rgba(79, 70, 229, 0.98) 100%) !important;
-}
-
-.mobile-nav *,
-.mobile-nav-content,
-.mobile-nav-header,
-.mobile-nav-links,
-.mobile-nav-link,
-.mobile-close-btn,
-.mobile-logo,
-.mobile-lang-switch,
-.mobile-lang-switch a {
-    pointer-events: auto !important;
-    z-index: 10001 !important;
-}
-
-.mobile-overlay {
-    z-index: 10000 !important;
-    pointer-events: none;
+/* Mobile menu fixes - simplified */
+.mobile-nav.active {
+    left: 0;
 }
 
 .mobile-overlay.active {
+    opacity: 1;
+    visibility: visible;
     pointer-events: auto;
 }
 
