@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://exampass.com/sitemap.xml
+
+# Crawl-delay for better server performance
+Crawl-delay: 1
+
+# Block access to certain directories
+Disallow: /js/
+Disallow: /css/
+Disallow: /assets/universities/
+
+# Allow access to important assets
+Allow: /assets/logo/
+Allow: /css/style.css
+Allow: /js/main.js 

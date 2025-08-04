@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    
+    <!-- Homepage -->
+    <url>
+        <loc>https://exampass.com/</loc>
+        <lastmod>2025-01-03</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://exampass.com/"/>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://exampass.com/ru/"/>
+    </url>
+    
+    <!-- Russian version -->
+    <url>
+        <loc>https://exampass.com/ru/</loc>
+        <lastmod>2025-01-03</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://exampass.com/"/>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://exampass.com/ru/"/>
+    </url>
+    
+    <!-- About section -->
+    <url>
+        <loc>https://exampass.com/#about</loc>
+        <lastmod>2025-01-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Methodology section -->
+    <url>
+        <loc>https://exampass.com/#methodology</loc>
+        <lastmod>2025-01-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Contact section -->
+    <url>
+        <loc>https://exampass.com/#contact</loc>
+        <lastmod>2025-01-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- Success stories -->
+    <url>
+        <loc>https://exampass.com/#success</loc>
+        <lastmod>2025-01-03</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+</urlset> 
